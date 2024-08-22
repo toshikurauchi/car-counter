@@ -99,7 +99,7 @@ class CarDetector:
         self.model = YOLO(MODELS / "yolov10n.pt")
 
     def detect(self, frame):
-        results = self.model(frame, stream=True)
+        results = self.model.track(frame, stream=True, persist=True)
         cars = []
         for r in results:
             boxes = r.boxes
@@ -108,5 +108,5 @@ class CarDetector:
                 class_name = CLASS_NAMES[int(cls)]
                 if class_name in ("car", "truck", "bus"):
                     x1, y1, x2, y2 = [int(v) for v in box.xyxy[0]]
-                    cars.append(DetectedObject(x1, y1, x2 - x1, y2 - y1))
+                    cars.append(DetectedObject(x1, y1, x2 - x1, y2 - y1, int(box.id)))
         return cars
