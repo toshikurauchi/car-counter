@@ -94,7 +94,7 @@ CLASS_NAMES = [
 ]
 
 
-class CarDetector:
+class ObjectDetector:
     def __init__(self) -> None:
         self.model = YOLO(MODELS / "yolov10n.pt")
 
@@ -105,8 +105,8 @@ class CarDetector:
             boxes = r.boxes
             for box in boxes:
                 cls = box.cls[0]
-                class_name = CLASS_NAMES[int(cls)]
-                if class_name in ("car", "truck", "bus"):
+                label = CLASS_NAMES[int(cls)]
+                if label in ("person", "bicycle", "car", "motorbike", "truck", "bus"):
                     x1, y1, x2, y2 = [int(v) for v in box.xyxy[0]]
-                    cars.append(DetectedObject(x1, y1, x2 - x1, y2 - y1, int(box.id)))
+                    cars.append(DetectedObject(x1, y1, x2 - x1, y2 - y1, int(box.id), label))
         return cars
