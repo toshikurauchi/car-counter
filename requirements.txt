@@ -1,3 +1,5 @@
+click
 opencv-python
 opencv-contrib-python
+tqdm
 ultralytics

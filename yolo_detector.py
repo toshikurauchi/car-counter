@@ -96,10 +96,10 @@ CLASS_NAMES = [
 
 class ObjectDetector:
     def __init__(self) -> None:
-        self.model = YOLO(MODELS / "yolov10n.pt")
+        self.model = YOLO(MODELS / "yolov10n.pt", task="track", verbose=False)
 
     def detect(self, frame):
-        results = self.model.track(frame, stream=True, persist=True)
+        results = self.model.track(frame, stream=True, persist=True, verbose=False)
         cars = []
         for r in results:
             boxes = r.boxes
