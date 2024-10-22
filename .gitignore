@@ -4,6 +4,7 @@
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
+frames/
 *.py[cod]
 *$py.class
 
@@ -131,6 +132,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+env_car/
 
 # Spyder project settings
 .spyderproject
